@@ -23,20 +23,20 @@ El sistema incluye las siguientes interfaces y funcionalidades:
 
 1. Clonar este repositorio:
    ```bash
-   git clone [https://github.com/tu-usuario/SIPE-Android.git](https://github.com/tu-usuario/SIPE-Android.git)
+   git clone [https://github.com/juann11/App_Nativa_SIPE.git]
 
-   Abrir el proyecto en Android Studio.
+2. Abrir el proyecto en Android Studio.
 
-Sincronizar los archivos de Gradle.
+3. Sincronizar los archivos de Gradle.
 
-Conectar un dispositivo físico Android (Target de instalación) con las opciones de desarrollador y depuración USB activadas.
+4. Conectar un dispositivo físico Android (Target de instalación) con las opciones de desarrollador y depuración USB activadas.
 
-Ejecutar la aplicación desde Android Studio (Shift + F10).
+5. Ejecutar la aplicación desde Android Studio (Shift + F10).
 
-📄 Diseño (Wireframes)
+## 📄 Diseño (Wireframes)
 Los wireframes manuales en papel se encuentran en la carpeta /docs/wireframes_papel.
 
 El diseño digital e interactivo puede visualizarse en nuestro [Enlace a Figma aquí].
 
-👥 Créditos / Desarrolladores
+## 👥 Créditos / Desarrolladores
 Juan José Ospina Arroyave - Ingeniería Sistemas e Informatica.
