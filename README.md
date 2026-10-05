@@ -1,73 +1,56 @@
-# SIPE (Sistema Integrado de Planificación Estudiantil)
+# SIPE — Sistema Integrado de Planificación Estudiantil
 
-SIPE es la propuesta de proyecto del estudiante para la Entrega 3 (tema libre permitido: "El estudiante puede proponer un proyecto").
-Equivale a Checklist de tareas + Finanzas/metas + Calendario académico, tipo iStudiez Pro pero como app oficial de la universidad, con sistema de rachas para incentivar el uso diario. Funciona 100% offline con Room (login simulado en local, como pedía la Entrega 1).
+SIPE es la app oficial de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un sistema de rachas que te motiva a estudiar todos los días. Inspirada en iStudiez Pro, pensada para que la institución la adopte como su app estudiantil. Funciona 100 % sin internet: tus datos viven en el dispositivo.
 
-## 🚀 Características Principales (Módulos exigidos + extras)
+## Funcionalidades
 
-* **Autenticación (Login/Registro):** `LoginScreen` / `RegisterScreen` con credenciales institucionales (Room local en Fase 1, Firebase Auth en Fase B2B).
-* **Dashboard (Menú Principal):** `DashboardScreen` con racha, puntos, próximas tareas y materias.
-* **Módulo de Clases (Listado y Detalle):** `ClassesScreen` + `ClassDetailScreen` (salón, profesor, créditos, horario).
-* **Gestión Académica (Formulario):** `TaskFormScreen` para tareas/recordatorios + `GradesPlanScreen` para notas y metas del semestre.
-* **Preferencias (Configuración):** `SettingsScreen` (tema oscuro, notificaciones, cerrar sesión).
-* **Acerca de (Créditos):** `AboutScreen` con versión y equipo.
-* **Extra diferenciador:** Sistema de rachas 🔥 (`SessionManager.registerDailyActivity()`): +10 pts/día, +2 si re-entra, +50 bonus cada 7 días, niveles Novato → Leyenda SIPE.
+- **Hoy:** agenda del día (clases + entregas), resumen de pendientes, materias y promedio, y tu racha.
+- **Calendario:** vista mensual en español con modos Horario y Tareas, puntos en los días con eventos y detalle del día elegido.
+- **Tareas:** pestañas Actuales/Completadas, orden por fecha, materia o prioridad, y agrupación por día de entrega.
+- **Horario:** listado de materias con profesor, salón, horario y créditos, más detalle con sus entregas pendientes y realizadas.
+- **Planificador:** estado del semestre (promedio, materias aprobando, tareas vencidas), resumen por materia y notas con peso porcentual.
+- **Rachas y niveles:** cada día activo suma puntos. Niveles con mascota: 🐣 Novato → 🐰 En racha → 🦊 Avanzado → 🦉 Maestro → 🐉 Leyenda SIPE. Incluye congelamientos que te salvan un día perdido y bonus cada 7 días.
+- **Ajustes y créditos:** cuenta, tema oscuro, tu nivel y la información del equipo.
 
-## 🛠 Herramientas y Tecnologías
+## Capturas
 
-* **Nativo:** Android Studio + Kotlin + Jetpack Compose (Material3) + Navigation Compose.
-* **Arquitectura:** MVVM. `MainActivity` → `AppNav` → `ViewModels` → `SipeRepository` → `Room` + `DataStore`.
-* **Persistencia Fase 1 (entrega):** Room (`User, Course, TaskItem, Grade, SemesterGoal`) + DataStore (sesión + racha + tema).
-* **Fase 2 B2B (universidad real):** Firebase Auth + Firestore + FCM. Dependencias listas pero comentadas en `app/build.gradle.kts`. Ver `docs/PUBLICACION.md`.
-* **Diseño UI/UX:** Figma. Ver `docs/WIREFRAMES.md`.
-* **Distribución:** App Bundle (.aab) firmado para Google Play Console.
+Próximamente: Hoy, Calendario, Tareas y Planificador.
 
-## 📁 Estructura
+## Tecnología
+
+- **App nativa:** Kotlin + Jetpack Compose + Material 3 (minSdk 26).
+- **Arquitectura:** MVVM con capas `ui / domain / data`, Navigation Compose y StateFlow.
+- **Datos locales:** Room (usuarios, materias, tareas, notas) y DataStore (sesión, racha, tema). Sin backend: ideal para usar offline.
+- **Calidad:** lógica de rachas como código puro con tests unitarios (`StreakCalculatorTest`).
 
 ```
 app/src/main/java/com/sipe/app/
-  MainActivity.kt
-  SipeApplication.kt
-  data/ Entities.kt, SipeDatabase.kt, SessionManager.kt, SipeRepository.kt
-  ui/ AppViewModels.kt, theme/Theme.kt, nav/AppNav.kt, screens/AuthScreens.kt, screens/MainScreens.kt
-docs/
-  WIREFRAMES.md
-  PUBLICACION.md
-  PRESENTACION.md
-  CHECKLIST_ENTREGA3.md
-  play/ (ficha de tienda: descripciones + checklist recursos)
+  MainActivity.kt · SipeApplication.kt
+  data/      Room + DataStore + seguridad PBKDF2
+  domain/    rachas, niveles y reglas de negocio
+  ui/        navegación, pantallas y tema
 ```
 
-## ✅ Cobertura Entrega 3 (según https://xacarana.com/cursos/aplicaciones_moviles/#/6/2)
+## Cómo ejecutar
 
-| Pedido | Estado SIPE |
-|---|---|
-| Tema libre propuesto | OK: organizador universitario (checklist + metas + horario) |
-| Wireframe papel (8 secciones) | Pendiente foto: `docs/wireframes_papel/` ver `docs/WIREFRAMES.md` |
-| Wireframe Figma digital | Pendiente link en sección Diseño |
-| login, registro, menú, listado, detalle, formulario, configuración, créditos | OK en `ui/nav/AppNav.kt` + `ui/screens/` |
-| Montaje Android Studio + Kotlin | OK: Compose (ruta oficial de referentes) |
-| Funcionalidades | OK: CRUD tareas/notas/metas + rachas |
-| Prueba en físico (target) | Ver `docs/PUBLICACION.md` |
-| Nombre, gráficos, descripción + .aab firmado + Play | Ver `docs/play/` + `docs/PUBLICACION.md` |
-| Presentación arquitectura/vistas/funciones/publicación | Ver `docs/PRESENTACION.md` |
-
-## ⚙️ Requisitos e Instalación (Para el evaluador)
-
-1. Clonar:
+1. Clona el repositorio:
    ```bash
    git clone https://github.com/juann11/App_Nativa_SIPE.git
    ```
-2. Abrir la carpeta en Android Studio (Hedgehog o superior).
-3. Sincronizar Gradle (usa Gradle 8.7, AGP 8.5.2, Kotlin 2.0.20).
-4. Conectar dispositivo físico Android con depuración USB activada.
-5. Run (Shift + F10). Usuario de prueba: regístrate con tu correo institucional, la BD trae 5 materias, 3 tareas, notas y metas de ejemplo.
+2. Ábrelo en Android Studio y sincroniza Gradle.
+3. Conecta un dispositivo Android con depuración USB y pulsa Run.
+4. Crea tu cuenta con el botón **Crear cuenta** e inicia sesión. La app incluye materias, tareas y notas de ejemplo.
 
-## 📄 Diseño (Wireframes)
+Para correr los tests: `./gradlew :app:testDebugUnitTest`.
 
-* Papel: fotos en `/docs/wireframes_papel/` (subir escaneos).
-* Digital: [Enlace a Figma aquí] — estructura propuesta en `docs/WIREFRAMES.md`.
+## Publicación
 
-## 👥 Créditos / Desarrolladores
+La ficha de tienda (nombre, descripciones, icono y capturas), la guía de firma del `.aab` y el proceso de Play Console están en [`docs/PUBLICACION.md`](docs/PUBLICACION.md) y [`docs/play/`](docs/play/).
 
-Juan José Ospina Arroyave - Ingeniería Sistemas e Informática.
+## Diseño
+
+Wireframes en papel y archivo interactivo de Figma: ver [`docs/WIREFRAMES.md`](docs/WIREFRAMES.md).
+
+## Equipo
+
+- Juan José Ospina Arroyave — Ingeniería de Sistemas e Informática.
