@@ -1,0 +1,11 @@
+# Android
+/build
+/app/build
+/app/release/
+*.jks
+*.keystore
+local.properties
+.gradle/
+.idea/
+# Keystore SIPE - NO subir
+sipe-release.jks
