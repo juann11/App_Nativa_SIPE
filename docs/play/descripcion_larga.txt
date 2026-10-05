@@ -1,0 +1,15 @@
+SIPE - Sistema Integrado de Planificación Estudiantil.
+
+La app oficial de tu universidad para organizar el semestre: calendario de clases, tareas y recordatorios, notas con promedio ponderado, metas del semestre y sistema de rachas que te motiva a estudiar cada día.
+
+Funcionalidades:
+- Login y registro con correo institucional (simulado en local, sin internet).
+- Menú principal con racha, puntos y próximas entregas.
+- Horario de clases: listado y detalle (profesor, salón, horario, créditos).
+- Tareas: crear, completar y eliminar. Completar suma racha y puntos.
+- Notas por materia y metas del semestre con progreso.
+- Configuración: tema oscuro y sesión. Créditos del equipo.
+
+Rachas SIPE: entra cada día o completa una tarea. +10 pts por día, +50 bonus cada 7 días. Niveles: Novato, En racha, Avanzado, Maestro, Leyenda SIPE.
+
+Hecha en Android Studio + Kotlin + Jetpack Compose, arquitectura MVVM + Room.
