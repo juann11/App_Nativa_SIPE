@@ -12,10 +12,6 @@ SIPE es la app oficial de tu universidad para organizar la vida académica: hora
 - **Rachas y niveles:** cada día activo suma puntos. Niveles con mascota: 🐣 Novato → 🐰 En racha → 🦊 Avanzado → 🦉 Maestro → 🐉 Leyenda SIPE. Incluye congelamientos que te salvan un día perdido y bonus cada 7 días.
 - **Ajustes y créditos:** cuenta, tema oscuro, tu nivel y la información del equipo.
 
-## Capturas
-
-Próximamente: Hoy, Calendario, Tareas y Planificador.
-
 ## Tecnología
 
 - **App nativa:** Kotlin + Jetpack Compose + Material 3 (minSdk 26).

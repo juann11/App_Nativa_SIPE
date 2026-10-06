@@ -891,8 +891,8 @@ fun SettingsScreen(
                     Icon(Icons.Filled.Notifications, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
-                        Text("Recordatorios", fontWeight = FontWeight.SemiBold)
-                        Text("Aviso diario para no perder tu racha (próxima versión).", style = MaterialTheme.typography.bodySmall)
+                        Text("Constancia diaria", fontWeight = FontWeight.SemiBold)
+                        Text("Abrir la app o completar una tarea cada día mantiene viva tu racha.", style = MaterialTheme.typography.bodySmall)
                     }
                 }
                 TextButton(onClick = onAbout, modifier = Modifier.fillMaxWidth()) {
@@ -947,10 +947,9 @@ fun AboutScreen(onBack: () -> Unit) {
         }
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                Text("Tecnología", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Text("Kotlin + Jetpack Compose + Material 3")
-                Text("MVVM + Room + DataStore", style = MaterialTheme.typography.bodySmall)
-                Text("Login, Registro, Hoy, Calendario, Tareas, Plan, Ajustes, Créditos + rachas.", style = MaterialTheme.typography.bodySmall)
+                Text("La app", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                Text("Hoy, Calendario, Tareas, Plan y Ajustes, con rachas y niveles que premian tu constancia.")
+                Text("Tus datos se guardan en este dispositivo.", style = MaterialTheme.typography.bodySmall)
             }
         }
     }

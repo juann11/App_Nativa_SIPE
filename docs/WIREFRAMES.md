@@ -22,4 +22,4 @@ Crear archivo "SIPE - Wireframe Digital" con:
 
 Flujo de racha a mostrar en Figma: tarjeta en Home con "🔥 5 días • 120 pts • Nivel En racha".
 
-Pegar el enlace en README donde dice [Enlace a Figma aquí].
+Pega el enlace del archivo de Figma en el README, sección Diseño.

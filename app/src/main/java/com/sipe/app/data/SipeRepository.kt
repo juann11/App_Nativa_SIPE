@@ -93,20 +93,20 @@ class SipeRepository(
 
         val existingTitles = db.taskDao().titles().toSet()
         listOf(
-            TaskItem(title = "Taller de Kotlin - Compose", courseName = "Programación Móvil", dueDate = "2026-10-05", priority = "ALTA", description = "Terminar dashboard + rachas"),
+            TaskItem(title = "Taller de interfaces", courseName = "Programación Móvil", dueDate = "2026-10-05", priority = "ALTA", description = "Terminar pantallas y navegación"),
             TaskItem(title = "Parcial Cálculo", courseName = "Cálculo Diferencial", dueDate = "2026-10-08", priority = "ALTA", description = "Capítulos 3 y 4: derivadas"),
             TaskItem(title = "Informe laboratorio Física", courseName = "Física I", dueDate = "2026-10-10", priority = "MEDIA", description = "Movimiento rectilíneo + gráficas"),
             TaskItem(title = "Quiz verbos técnicos", courseName = "Inglés Técnico", dueDate = "2026-10-03", priority = "MEDIA"),
             TaskItem(title = "Modelo ER biblioteca", courseName = "Bases de Datos", dueDate = "2026-10-06", priority = "ALTA", description = "Entregar diagrama + script SQL"),
             TaskItem(title = "Leer guía de laboratorio", courseName = "Física I", dueDate = "2026-10-02", priority = "BAJA", done = true),
             TaskItem(title = "Repaso semana 8", courseName = "Cálculo Diferencial", dueDate = "2026-10-12", priority = "BAJA"),
-            TaskItem(title = "Avance proyecto final", courseName = "Programación Móvil", dueDate = "2026-10-15", priority = "ALTA", description = "Publicar .aab en Play Console"),
+            TaskItem(title = "Avance proyecto final", courseName = "Programación Móvil", dueDate = "2026-10-15", priority = "ALTA", description = "Entregar informe y demo"),
             TaskItem(title = "Quiz listas enlazadas", courseName = "Estructuras de Datos", dueDate = "2026-10-07", priority = "MEDIA"),
             TaskItem(title = "Ensayo dilemas IA", courseName = "Ética Profesional", dueDate = "2026-10-09", priority = "BAJA", description = "2 páginas, normas APA")
         ).filter { it.title !in existingTitles }.forEach { db.taskDao().upsert(it) }
         if (db.gradeDao().count() == 0) {
             db.gradeDao().upsert(Grade(courseName = "Programación Móvil", label = "Parcial 1", value = 4.5, weight = 0.3))
-            db.gradeDao().upsert(Grade(courseName = "Programación Móvil", label = "Quiz Compose", value = 5.0, weight = 0.2))
+            db.gradeDao().upsert(Grade(courseName = "Programación Móvil", label = "Quiz 1", value = 5.0, weight = 0.2))
             db.gradeDao().upsert(Grade(courseName = "Cálculo Diferencial", label = "Parcial 1", value = 3.8, weight = 0.35))
         }
         if (db.goalDao().count() == 0) {
