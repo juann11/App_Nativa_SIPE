@@ -1,6 +1,6 @@
 # SIPE — Sistema Integrado de Planificación Estudiantil
 
-SIPE es la app oficial de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un sistema de rachas que te motiva a estudiar todos los días. Inspirada en iStudiez Pro, pensada para que la institución la adopte como su app estudiantil. Funciona 100 % sin internet: tus datos viven en el dispositivo.
+SIPE es la app oficial de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un sistema de rachas que te motiva a estudiar todos los días. Diseñada para que la institución la adopte como su app estudiantil. Funciona 100 % sin internet: tus datos viven en el dispositivo.
 
 ## Funcionalidades
 

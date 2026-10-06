@@ -1,11 +1,11 @@
 ---
 name: app-nativa-organizador
-description: Guía completa para construir, probar, firmar y publicar en Google Play la app nativa Android (Kotlin, Android Studio) de la Entrega 3 - un organizador estudiantil tipo iStudiez Pro (calendario de clases, tareas, notas, planificación del semestre, sistema de rachas). Úsala siempre que el usuario mencione la Entrega 3, APP Nativa, Android Studio, Kotlin, Jetpack Compose, wireframes/Figma de la app, Room, rachas, calendario o tareas de la app, firmar la app, generar el .aab, Play Console, publicar en la tienda o armar la presentación de la entrega, aunque no diga "skill" ni nombre el proyecto.
+description: Guía completa para construir, probar, firmar y publicar en Google Play la app nativa Android (Kotlin, Android Studio) de la Entrega 3 - un organizador estudiantil universitario (calendario de clases, tareas, notas, resumen del semestre, sistema de rachas). Úsala siempre que el usuario mencione la Entrega 3, APP Nativa, Android Studio, Kotlin, Jetpack Compose, wireframes/Figma de la app, Room, rachas, calendario o tareas de la app, firmar la app, generar el .aab, Play Console, publicar en la tienda o armar la presentación de la entrega, aunque no diga "skill" ni nombre el proyecto.
 ---
 
 # App nativa organizador estudiantil (Entrega 3)
 
-Proyecto académico en equipo: app Android nativa en Kotlin, publicada en Google Play. Concepto: organizador estilo iStudiez Pro que una universidad podría adoptar como app oficial. Funciones núcleo: calendario de clases, tareas, notas, planificación del semestre y sistema de rachas.
+Proyecto académico en equipo: app Android nativa en Kotlin, publicada en Google Play. Concepto: organizador estudiantil que una universidad podría adoptar como app oficial. Funciones núcleo: calendario de clases, tareas, notas, resumen del semestre y sistema de rachas.
 
 ## Antes de escribir código
 

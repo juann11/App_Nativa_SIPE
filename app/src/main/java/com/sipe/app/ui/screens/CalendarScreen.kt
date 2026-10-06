@@ -56,7 +56,7 @@ import java.util.Locale
 private val ES = Locale("es", "ES")
 
 /**
- * Calendario mensual estilo iStudiez: selector Horario/Tareas, botón Hoy,
+ * Calendario mensual de agenda universitaria: selector Horario/Tareas, botón Hoy,
  * puntos en días con eventos y lista de lo programado el día elegido.
  */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -123,7 +123,7 @@ fun CalendarScreen(
                 Icon(Icons.Filled.ChevronRight, contentDescription = "Mes siguiente")
             }
         }
-        // Encabezado días (semana inicia domingo, como iStudiez)
+        // Encabezado días (la semana inicia el domingo)
         Row(Modifier.fillMaxWidth()) {
             listOf("d", "l", "m", "m", "j", "v", "s").forEach {
                 Text(it, Modifier.weight(1f), textAlign = TextAlign.Center, style = MaterialTheme.typography.bodySmall)
