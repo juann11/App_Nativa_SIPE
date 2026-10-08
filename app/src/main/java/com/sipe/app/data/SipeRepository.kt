@@ -1,5 +1,7 @@
 package com.sipe.app.data
 
+import java.time.LocalDate
+
 class SipeRepository(
     private val db: SipeDatabase,
     private val session: SessionManager
@@ -80,7 +82,23 @@ class SipeRepository(
      * aunque la BD ya tenga datos de versiones anteriores.
      */
     suspend fun seedIfEmpty() {
-        val existingCourses = db.courseDao().names().toSet()
+        // Cuenta administradora para demostración y evaluación.
+        if (db.userDao().findByEmail(ADMIN_EMAIL) == null) {
+            val salt = Security.generateSalt()
+            db.userDao().insert(
+                User(
+                    name = "Administrador SIPE",
+                    email = ADMIN_EMAIL,
+                    passwordHash = Security.hash(ADMIN_PASSWORD, salt),
+                    salt = salt
+                )
+            )
+        }
+
+        // 12 sesiones (2 por día, lunes a sábado): misma materia puede
+        // repetirse otro día; se comparan por materia+día+hora.
+        val existingSessions = db.courseDao().sessionKeys().toSet()
+        fun keyOf(c: Course) = "${c.name}|${c.dayOfWeek}|${c.startTime}"
         listOf(
             Course(name = "Cálculo Diferencial", professor = "Dra. M. Ruiz", classroom = "Bloque B-204", dayOfWeek = "LUN", startTime = "08:00", endTime = "10:00", credits = 4, colorHex = "#1B5E20"),
             Course(name = "Programación Móvil", professor = "Ing. J. Ospina", classroom = "Lab 3", dayOfWeek = "MAR", startTime = "10:00", endTime = "12:00", credits = 3, colorHex = "#1565C0"),
@@ -88,8 +106,13 @@ class SipeRepository(
             Course(name = "Inglés Técnico", professor = "Lic. S. Pérez", classroom = "Virtual", dayOfWeek = "JUE", startTime = "08:00", endTime = "09:30", credits = 2, colorHex = "#EF6C00"),
             Course(name = "Bases de Datos", professor = "Ing. L. Gómez", classroom = "Lab 1", dayOfWeek = "VIE", startTime = "10:00", endTime = "12:00", credits = 3, colorHex = "#00695C"),
             Course(name = "Estructuras de Datos", professor = "Ing. R. Castaño", classroom = "Lab 2", dayOfWeek = "MAR", startTime = "14:00", endTime = "16:00", credits = 3, colorHex = "#AD1457"),
-            Course(name = "Ética Profesional", professor = "Dra. P. León", classroom = "Bloque C-301", dayOfWeek = "LUN", startTime = "10:30", endTime = "12:00", credits = 2, colorHex = "#00838F")
-        ).filter { it.name !in existingCourses }.forEach { db.courseDao().insert(it) }
+            Course(name = "Ética Profesional", professor = "Dra. P. León", classroom = "Bloque C-301", dayOfWeek = "LUN", startTime = "10:30", endTime = "12:00", credits = 2, colorHex = "#00838F"),
+            Course(name = "Cálculo Diferencial", professor = "Dra. M. Ruiz", classroom = "Bloque B-204", dayOfWeek = "MIE", startTime = "10:00", endTime = "12:00", credits = 4, colorHex = "#1B5E20"),
+            Course(name = "Programación Móvil", professor = "Ing. J. Ospina", classroom = "Lab 3", dayOfWeek = "JUE", startTime = "14:00", endTime = "16:00", credits = 3, colorHex = "#1565C0"),
+            Course(name = "Inglés Técnico", professor = "Lic. S. Pérez", classroom = "Virtual", dayOfWeek = "VIE", startTime = "08:00", endTime = "09:30", credits = 2, colorHex = "#EF6C00"),
+            Course(name = "Física I", professor = "Dr. A. Torres", classroom = "Bloque A-101", dayOfWeek = "SAB", startTime = "08:00", endTime = "10:00", credits = 4, colorHex = "#6A1B9A"),
+            Course(name = "Estructuras de Datos", professor = "Ing. R. Castaño", classroom = "Lab 2", dayOfWeek = "SAB", startTime = "10:30", endTime = "12:30", credits = 3, colorHex = "#AD1457")
+        ).filter { keyOf(it) !in existingSessions }.forEach { db.courseDao().insert(it) }
 
         val existingTitles = db.taskDao().titles().toSet()
         listOf(
@@ -104,6 +127,24 @@ class SipeRepository(
             TaskItem(title = "Quiz listas enlazadas", courseName = "Estructuras de Datos", dueDate = "2026-10-07", priority = "MEDIA"),
             TaskItem(title = "Ensayo dilemas IA", courseName = "Ética Profesional", dueDate = "2026-10-09", priority = "BAJA", description = "2 páginas, normas APA")
         ).filter { it.title !in existingTitles }.forEach { db.taskDao().upsert(it) }
+
+        // Fechas rodantes: las tareas de ejemplo pendientes siempre vencen
+        // entre hoy y los próximos 7 días, para que cada día haya algo
+        // por entregar. No toca tareas hechas ni creadas por el usuario.
+        val today = LocalDate.now()
+        mapOf(
+            "Quiz listas enlazadas" to 0,
+            "Ensayo dilemas IA" to 0,
+            "Taller de interfaces" to 1,
+            "Parcial Cálculo" to 2,
+            "Modelo ER biblioteca" to 3,
+            "Informe laboratorio Física" to 4,
+            "Quiz verbos técnicos" to 5,
+            "Repaso semana 8" to 6,
+            "Avance proyecto final" to 7
+        ).forEach { (title, offset) ->
+            db.taskDao().refreshSeedDate(title, today.plusDays(offset.toLong()).toString())
+        }
         if (db.gradeDao().count() == 0) {
             db.gradeDao().upsert(Grade(courseName = "Programación Móvil", label = "Parcial 1", value = 4.5, weight = 0.3))
             db.gradeDao().upsert(Grade(courseName = "Programación Móvil", label = "Quiz 1", value = 5.0, weight = 0.2))
@@ -126,5 +167,7 @@ class SipeRepository(
 
     companion object {
         val EMAIL_RE = Regex("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$")
+        const val ADMIN_EMAIL = "admin@sipe.edu"
+        const val ADMIN_PASSWORD = "Admin123"
     }
 }

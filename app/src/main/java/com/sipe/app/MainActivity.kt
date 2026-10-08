@@ -14,9 +14,10 @@ class MainActivity : ComponentActivity() {
         val app = application as SipeApplication
         setContent {
             val dark by app.session.dark.collectAsState(initial = false)
-            val logged by app.session.logged.collectAsState(initial = false)
             SipeTheme(dark = dark) {
-                AppNav(app, startLogged = logged)
+                // La app siempre pide login al abrir (decisión de producto:
+                // la sesión se usa para el saludo, no para omitir el acceso).
+                AppNav(app, startLogged = false)
             }
         }
     }

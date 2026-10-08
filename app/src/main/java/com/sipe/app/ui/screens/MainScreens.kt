@@ -9,11 +9,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -342,32 +345,40 @@ fun ClassesScreen(courses: List<Course>, onDetail: (Long) -> Unit, onBack: () ->
 
 @Composable
 fun ClassDetailScreen(course: Course?, tasks: List<TaskItem> = emptyList(), onBack: () -> Unit) {
-    Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    LazyColumn(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (course == null) {
-            Text("Materia no encontrada")
+            item { Text("Materia no encontrada") }
         } else {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Box(Modifier.size(18.dp).clip(CircleShape).background(courseDot(course.colorHex)))
-                Spacer(Modifier.width(8.dp))
-                Text(course.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-            }
-            Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                    DetailRow("Profesor", course.professor)
-                    DetailRow("Salón", course.classroom)
-                    DetailRow("Horario", "${course.dayOfWeek} ${course.startTime} – ${course.endTime}")
-                    DetailRow("Créditos", "${course.credits}")
+            item {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(Modifier.size(18.dp).clip(CircleShape).background(courseDot(course.colorHex)))
+                    Spacer(Modifier.width(8.dp))
+                    Text(course.name, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
                 }
             }
-            Text("Entregas de esta materia", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            item {
+                Card(Modifier.fillMaxWidth()) {
+                    Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        DetailRow("Profesor", course.professor)
+                        DetailRow("Salón", course.classroom)
+                        DetailRow("Horario", "${course.dayOfWeek} ${course.startTime} – ${course.endTime}")
+                        DetailRow("Créditos", "${course.credits}")
+                    }
+                }
+            }
+            item {
+                Text("Entregas de esta materia", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            }
             val pendingMine = tasks.filter { it.courseName == course.name && !it.done }
             val doneMine = tasks.filter { it.courseName == course.name && it.done }
             if (pendingMine.isEmpty() && doneMine.isEmpty()) {
-                EmptyState("Sin tareas en ${course.name}. Crea una desde Tareas eligiendo esta materia.")
+                item { EmptyState("Sin tareas en ${course.name}. Crea una desde Tareas eligiendo esta materia.") }
             } else {
                 if (pendingMine.isNotEmpty()) {
-                    Text("Pendientes (${pendingMine.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                    pendingMine.forEach { t ->
+                    item {
+                        Text("Pendientes (${pendingMine.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                    }
+                    items(pendingMine) { t ->
                         Card(Modifier.fillMaxWidth()) {
                             Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Pill(t.priority, priorityColors(t.priority).first)
@@ -378,12 +389,13 @@ fun ClassDetailScreen(course: Course?, tasks: List<TaskItem> = emptyList(), onBa
                                 }
                             }
                         }
-                        Spacer(Modifier.height(6.dp))
                     }
                 }
                 if (doneMine.isNotEmpty()) {
-                    Text("Entregadas ✅ (${doneMine.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
-                    doneMine.forEach { t ->
+                    item {
+                        Text("Entregadas ✅ (${doneMine.size})", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+                    }
+                    items(doneMine) { t ->
                         Card(Modifier.fillMaxWidth()) {
                             Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
                                 Icon(Icons.Filled.CheckCircle, contentDescription = null, tint = gradeColor(4.5))
@@ -395,13 +407,16 @@ fun ClassDetailScreen(course: Course?, tasks: List<TaskItem> = emptyList(), onBa
                                 )
                             }
                         }
-                        Spacer(Modifier.height(6.dp))
                     }
                 }
             }
         }
-        Spacer(Modifier.height(8.dp))
-        OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Volver") }
+        item {
+            Spacer(Modifier.height(8.dp))
+        }
+        item {
+            OutlinedButton(onClick = onBack, modifier = Modifier.fillMaxWidth()) { Text("Volver") }
+        }
     }
 }
 
@@ -567,7 +582,12 @@ fun TaskFormScreen(courses: List<Course>, onSave: (TaskItem) -> Unit, onCancel: 
         ) { DatePicker(state) }
     }
 
-    Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(
+        Modifier.fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
         Text("Nueva tarea", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Text("Completarla te suma racha y puntos.", style = MaterialTheme.typography.bodyMedium)
         OutlinedTextField(title, { title = it }, label = { Text("¿Qué tienes que hacer?*") }, modifier = Modifier.fillMaxWidth(), singleLine = true)
@@ -813,20 +833,27 @@ fun SettingsScreen(
 ) {
     val myLevel = Levels.forPoints(points)
     val next = Levels.nextAfter(points)
-    Column(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text("Ajustes", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Card(Modifier.fillMaxWidth()) {
-            Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Filled.AccountCircle, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.primary)
-                Spacer(Modifier.width(12.dp))
-                Column {
-                    Text(name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                    if (email.isNotBlank()) Text(email, style = MaterialTheme.typography.bodyMedium)
-                    else Text("Cuenta local en este dispositivo", style = MaterialTheme.typography.bodySmall)
+    LazyColumn(Modifier.fillMaxSize().padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        item {
+            Text("Ajustes", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        }
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Filled.AccountCircle, contentDescription = null, modifier = Modifier.size(48.dp), tint = MaterialTheme.colorScheme.primary)
+                    Spacer(Modifier.width(12.dp))
+                    Column {
+                        Text(name, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+                        if (email.isNotBlank()) Text(email, style = MaterialTheme.typography.bodyMedium)
+                        else Text("Cuenta local en este dispositivo", style = MaterialTheme.typography.bodySmall)
+                    }
                 }
             }
         }
-        Text("Mi nivel", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        item {
+            Text("Mi nivel", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        }
+        item {
         Card(
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
             modifier = Modifier.fillMaxWidth()
@@ -850,9 +877,13 @@ fun SettingsScreen(
                     style = MaterialTheme.typography.bodySmall,
                     textAlign = TextAlign.Center
                 )
+                }
             }
         }
+        item {
         Text("Todos los niveles", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        }
+        item {
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(4.dp)) {
                 Levels.all.forEach { l ->
@@ -875,16 +906,36 @@ fun SettingsScreen(
                 }
             }
         }
+        }
+        item {
         Text("Apariencia", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        }
+        item {
         Card(Modifier.fillMaxWidth()) {
-            Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
+            Row(
+                Modifier.fillMaxWidth()
+                    .heightIn(min = 64.dp)
+                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Icon(Icons.Filled.DarkMode, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
-                Spacer(Modifier.width(12.dp))
-                Text("Tema oscuro", modifier = Modifier.weight(1f), fontWeight = FontWeight.SemiBold)
-                Switch(dark, onDark)
+                Spacer(Modifier.width(16.dp))
+                Column(Modifier.weight(1f)) {
+                    Text("Tema oscuro", fontWeight = FontWeight.SemiBold)
+                    Text(
+                        if (dark) "Activado" else "Desactivado",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+                Spacer(Modifier.width(16.dp))
+                Switch(checked = dark, onCheckedChange = onDark)
             }
         }
+        }
+        item {
         Text("General", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
+        }
+        item {
         Card(Modifier.fillMaxWidth()) {
             Column(Modifier.padding(4.dp)) {
                 Row(Modifier.padding(12.dp), verticalAlignment = Alignment.CenterVertically) {
@@ -902,10 +953,13 @@ fun SettingsScreen(
                 }
             }
         }
+        }
+        item {
         Button(onClick = onLogout, modifier = Modifier.fillMaxWidth()) {
             Icon(Icons.Filled.Logout, contentDescription = null)
             Spacer(Modifier.width(8.dp))
             Text("Cerrar sesión")
+        }
         }
     }
 }

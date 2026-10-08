@@ -102,6 +102,9 @@ interface CourseDao {
 
     @Query("SELECT name FROM courses")
     suspend fun names(): List<String>
+
+    @Query("SELECT name || '|' || dayOfWeek || '|' || startTime FROM courses")
+    suspend fun sessionKeys(): List<String>
 }
 
 @Dao
@@ -126,6 +129,9 @@ interface TaskDao {
 
     @Query("SELECT title FROM tasks")
     suspend fun titles(): List<String>
+
+    @Query("UPDATE tasks SET dueDate = :date WHERE title = :title AND done = 0")
+    suspend fun refreshSeedDate(title: String, date: String)
 }
 
 @Dao
