@@ -1,25 +1,26 @@
-# Wireframes SIPE — guía rápida
+# Wireframes SIPE
 
-## 1. Papel (manual)
-Dibujar 8 pantallas en papel, una por hoja, foto legible y subir a `docs/wireframes_papel/`:
-1. Login (logo SIPE, correo, clave, botón entrar, link registro)
-2. Registro (nombre, correo institucional, clave, universidad, botón crear)
-3. Menú/Dashboard (saludo, tarjeta racha 🔥 + puntos, accesos: Hoy / Tareas / Horario / Plan)
-4. Listado (Horario semanal o lista de tareas con checkbox, prioridad por color)
-5. Detalle (materia: profesor, salón, horario, créditos + próximas entregas)
-6. Formulario (nueva tarea: título*, materia, fecha, prioridad, descripción, guardar)
-7. Configuración (tema oscuro switch, notificaciones switch, cerrar sesión)
-8. Créditos (logo, versión 1.0.0, equipo, universidad)
+## Digital (listo para Figma)
 
-Tomar foto con buena luz, nombrar: `01_login.jpg` ... `08_creditos.jpg`.
+En `docs/wireframes/` están las 8 pantallas en escala de grises, 360×800, calcadas de la app real:
 
-## 2. Figma (digital, escala de grises como en Entrega 1)
-Crear archivo "SIPE - Wireframe Digital" con:
-- Página 1: Diagrama de flujo + mapa de navegación (login → menú → listado → detalle / formulario).
-- Página 2: Wireframes (8 frames 360x800, escala grises, componentes reutilizados: botón primario, card, bottom nav 5 ítems)
-- Página 3: UI final (aplicar colores: primario #1B5E20, acento #FFB300, fondo #F6F7F9)
-- Prototipo: Login → Home → (Clases → Detalle) / (Tareas → Formulario) / (Plan) / (Ajustes) / (Info)
+1. `figma_01_login.png` — Login
+2. `figma_02_registro.png` — Registro
+3. `figma_03_hoy.png` — Menú / Hoy
+4. `figma_04_listado_clases.png` — Listado (horario)
+5. `figma_05_detalle_materia.png` — Detalle
+6. `figma_06_formulario_tarea.png` — Formulario
+7. `figma_07_ajustes.png` — Configuración
+8. `figma_08_creditos.png` — Créditos
 
-Flujo de racha a mostrar en Figma: tarjeta en Home con "🔥 5 días • 120 pts • Nivel En racha".
+## Llevarlo a Figma (15 min)
 
-Pega el enlace del archivo de Figma en el README, sección Diseño.
+1. Archivo nuevo "SIPE - Wireframe" → 8 frames de 360×800.
+2. Arrastra cada PNG a su frame como referencia (baja opacidad).
+3. Recalca encima con componentes: botón primario, campo, tarjeta, tab inferior.
+4. Prototipo → enlaces: Login → Hoy → (Clases → Detalle) / (Tareas → Formulario) / Plan / Ajustes → Créditos.
+5. Share → copiar enlace → pegarlo en el README (sección Diseño).
+
+## Papel (manual)
+
+Una hoja por pantalla calcando las 8 imágenes, con flechas de navegación. Fotos con buena luz a `docs/wireframes_papel/` como `01_login.jpg` … `08_creditos.jpg`.
