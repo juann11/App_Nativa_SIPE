@@ -1,5 +1,6 @@
-package com.sipe.app.ui.screens
+package com.sipe.app.ui.screens.calendar
 
+import com.sipe.app.ui.screens.components.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -228,15 +229,3 @@ fun CalendarScreen(
     }
 }
 
-@Composable
-fun FriendlyEmpty(title: String, subtitle: String) {
-    Column(
-        Modifier.fillMaxWidth().padding(vertical = 48.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("🎠", style = MaterialTheme.typography.displayLarge)
-        Spacer(Modifier.height(12.dp))
-        Text(title, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(subtitle, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
-}

@@ -1,5 +1,6 @@
-package com.sipe.app.ui.screens
+package com.sipe.app.ui.screens.auth
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
@@ -17,9 +19,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
+import com.sipe.app.R
 import com.sipe.app.ui.AuthViewModel
 
 @Composable
@@ -28,8 +33,15 @@ fun LoginScreen(vm: AuthViewModel, onLoginOk: () -> Unit, onGoRegister: () -> Un
     var pass by remember { mutableStateOf("") }
     Column(
         Modifier.fillMaxSize().padding(24.dp),
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Image(
+            painter = painterResource(id = R.drawable.ic_logo_mark),
+            contentDescription = "Logo SIPE",
+            modifier = Modifier.size(112.dp)
+        )
+        Spacer(Modifier.height(8.dp))
         Text("SIPE", style = MaterialTheme.typography.displayMedium, color = MaterialTheme.colorScheme.primary)
         Text("Sistema Integrado de Planificación Estudiantil")
         Spacer(Modifier.height(16.dp))

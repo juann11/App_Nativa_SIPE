@@ -3,5 +3,5 @@
     <color name="sipe_primary_dark">#0D3B1E</color>
     <color name="sipe_accent">#FFB300</color>
     <color name="sipe_bg">#F6F7F9</color>
-    <color name="ic_launcher_background">#0D3B1E</color>
+    <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

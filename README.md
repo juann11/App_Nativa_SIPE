@@ -2,29 +2,84 @@
 
 SIPE es la app oficial de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un sistema de rachas que te motiva a estudiar todos los días. Diseñada para que la institución la adopte como su app estudiantil. Funciona 100 % sin internet: tus datos viven en el dispositivo.
 
-## Funcionalidades
+## Pantallas
 
-- **Hoy:** agenda del día (clases + entregas), resumen de pendientes, materias y promedio, y tu racha.
-- **Calendario:** vista mensual en español con modos Horario y Tareas, puntos en los días con eventos y detalle del día elegido.
-- **Tareas:** pestañas Actuales/Completadas, orden por fecha, materia o prioridad, y agrupación por día de entrega.
-- **Horario:** listado de materias con profesor, salón, horario y créditos, más detalle con sus entregas pendientes y realizadas.
-- **Planificador:** estado del semestre (promedio, materias aprobando, tareas vencidas), resumen por materia y notas con peso porcentual.
-- **Rachas y niveles:** cada día activo suma puntos. Niveles con mascota: 🐣 Novato → 🐰 En racha → 🦊 Avanzado → 🦉 Maestro → 🐉 Leyenda SIPE. Incluye congelamientos que te salvan un día perdido y bonus cada 7 días.
-- **Ajustes y créditos:** cuenta, tema oscuro, tu nivel y la información del equipo.
+| Pantalla | Ruta | Archivo |
+|---|---|---|
+| Login / Registro | `login`, `register` | `ui/screens/auth/AuthScreens.kt` |
+| Hoy (agenda del día + racha) | `home` | `ui/screens/home/HoyScreen.kt` |
+| Calendario mensual | `calendar` | `ui/screens/calendar/CalendarScreen.kt` |
+| Tareas + Nueva tarea | `tasks`, `task_form` | `ui/screens/tasks/TasksScreens.kt` |
+| Horario + Detalle de materia | `classes`, `class/{id}` | `ui/screens/classes/ClassesScreens.kt` |
+| Planificador (Semestre / Notas) | `plan` | `ui/screens/plan/PlanScreen.kt` |
+| Ajustes + Créditos | `settings`, `about` | `ui/screens/settings/SettingsScreens.kt` |
+| Componentes compartidos | — | `ui/screens/components/SipeComponents.kt` |
 
-## Tecnología
+## Arquitectura: MVVM por capas
 
-- **App nativa:** Kotlin + Jetpack Compose + Material 3 (minSdk 26).
-- **Arquitectura:** MVVM con capas `ui / domain / data`, Navigation Compose y StateFlow.
-- **Datos locales:** Room (usuarios, materias, tareas, notas) y DataStore (sesión, racha, tema). Sin backend: ideal para usar offline.
-- **Calidad:** lógica de rachas como código puro con tests unitarios (`StreakCalculatorTest`).
+```
+┌──────────── UI (Compose) ────────────┐
+│ Screens + Navigation + ViewModels    │  ui/
+├──────────── Dominio ─────────────────┤
+│ Reglas puras, sin Android            │  domain/  (StreakCalculator, Levels)
+├──────────── Datos ───────────────────┤
+│ Room + DataStore + repositorio       │  data/
+└──────────────────────────────────────┘
+```
+
+- **Regla de dependencias:** `ui → domain, data`. La UI nunca toca la base de datos: solo `Flow` del repositorio y `StateFlow` de los ViewModels.
+- **Un ViewModel por área** (`AuthViewModel`, `MainViewModel`) con estado inmutable observado por Compose.
+- **Dominio testeable en JVM:** la lógica de rachas no depende de Android y tiene 8 tests unitarios (`StreakCalculatorTest`).
+- **Navegación:** grafo separado para autenticación; barra inferior con Hoy, Calendario, Tareas (badge de pendientes), Plan y Ajustes.
+
+## Stack tecnológico
+
+| Pieza | Versión |
+|---|---|
+| Kotlin | 2.0.20 (JVM 17) |
+| Jetpack Compose BOM / Material 3 | 2024.10.00 |
+| Navigation Compose | 2.7.7 |
+| Room (KSP) | 2.6.1 |
+| DataStore Preferences | 1.1.1 |
+| Coroutines | 1.9.0 |
+| JUnit (tests) | 4.13.2 |
+| Android Gradle Plugin | 8.5.2 |
+| Gradle | 8.7 |
+| compileSdk / targetSdk | 34 (Android 14) |
+| minSdk | 26 (Android 8.0+) |
+| applicationId / versión | `com.sipe.app` · 1.0.0 |
+
+## Base de datos: Room, la persistencia nativa de Android
+
+Se eligió **Room** (librería oficial de Jetpack sobre SQLite) porque es la vía nativa recomendada: verifica el SQL en compilación mediante KSP, expone los datos como `Flow` reactivo para Compose, soporta migraciones versionadas y no requiere servidor ni internet (offline-first, ideal para uso estudiantil).
+
+**Esquema (`SipeDatabase`, versión 2):**
+
+| Tabla | Campos clave |
+|---|---|
+| `users` | id, name, email (único), passwordHash (PBKDF2 + salt), university, career |
+| `courses` | id, name, professor, classroom, dayOfWeek, startTime, endTime, credits, colorHex |
+| `tasks` | id, title, description, courseName, dueDate (AAAA-MM-DD), priority, done |
+| `grades` | id, courseName, label, value (0–5), weight (0–1) |
+| `goals` | id, title, target, progress |
+
+**DataStore (`sipe_prefs`):** sesión (nombre, correo, logged), racha (current, best, points, freezes, lastDate) y tema oscuro.
+
+## Estructura del proyecto
 
 ```
 app/src/main/java/com/sipe/app/
   MainActivity.kt · SipeApplication.kt
-  data/      Room + DataStore + seguridad PBKDF2
-  domain/    rachas, niveles y reglas de negocio
-  ui/        navegación, pantallas y tema
+  data/       Entities.kt, SipeDatabase.kt, Security.kt, SessionManager.kt, SipeRepository.kt
+  domain/     StreakCalculator.kt, Levels.kt
+  ui/         AppViewModels.kt, theme/, nav/AppNav.kt
+  ui/screens/ auth/, home/, calendar/, tasks/, classes/, plan/, settings/, components/
+app/src/main/res/
+  drawable-nodpi/ic_logo_mark.png   (logo en la app)
+  mipmap-*/ic_launcher(.png)        (icono por densidad + adaptativo)
+  values/  strings, colors, themes
+app/src/test/  StreakCalculatorTest.kt
+docs/  brand/, play/, wireframes_papel/, ESTADO.md, PUBLICACION.md, WIREFRAMES.md, ...
 ```
 
 ## Cómo ejecutar
@@ -35,17 +90,19 @@ app/src/main/java/com/sipe/app/
    ```
 2. Ábrelo en Android Studio y sincroniza Gradle.
 3. Conecta un dispositivo Android con depuración USB y pulsa Run.
-4. Crea tu cuenta con el botón **Crear cuenta** e inicia sesión. La app incluye materias, tareas y notas de ejemplo.
+4. Entra con la cuenta de demostración o crea la tuya con **Crear cuenta**.
 
-Para correr los tests: `./gradlew :app:testDebugUnitTest`.
+**Cuenta demo:** `admin@sipe.edu` / `Admin123`
+
+Tests: `./gradlew :app:testDebugUnitTest`.
 
 ## Publicación
 
-La ficha de tienda (nombre, descripciones, icono y capturas), la guía de firma del `.aab` y el proceso de Play Console están en [`docs/PUBLICACION.md`](docs/PUBLICACION.md) y [`docs/play/`](docs/play/).
+La ficha de tienda (nombre, descripciones, `icono_512.png`), la guía de firma del `.aab` y el proceso de Play Console están en [`docs/PUBLICACION.md`](docs/PUBLICACION.md) y [`docs/play/`](docs/play/).
 
 ## Diseño
 
-Wireframes en papel y archivo interactivo de Figma: ver [`docs/WIREFRAMES.md`](docs/WIREFRAMES.md).
+Logo original en [`docs/brand/`](docs/brand/). Wireframes en papel y archivo interactivo de Figma: ver [`docs/WIREFRAMES.md`](docs/WIREFRAMES.md).
 
 ## Equipo
 

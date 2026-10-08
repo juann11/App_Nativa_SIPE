@@ -29,17 +29,17 @@ import androidx.navigation.navArgument
 import com.sipe.app.SipeApplication
 import com.sipe.app.ui.AuthViewModel
 import com.sipe.app.ui.MainViewModel
-import com.sipe.app.ui.screens.AboutScreen
-import com.sipe.app.ui.screens.CalendarScreen
-import com.sipe.app.ui.screens.ClassDetailLoader
-import com.sipe.app.ui.screens.ClassesScreen
-import com.sipe.app.ui.screens.HoyScreen
-import com.sipe.app.ui.screens.LoginScreen
-import com.sipe.app.ui.screens.PlanScreen
-import com.sipe.app.ui.screens.RegisterScreen
-import com.sipe.app.ui.screens.SettingsScreen
-import com.sipe.app.ui.screens.TaskFormScreen
-import com.sipe.app.ui.screens.TasksScreen
+import com.sipe.app.ui.screens.auth.LoginScreen
+import com.sipe.app.ui.screens.auth.RegisterScreen
+import com.sipe.app.ui.screens.calendar.CalendarScreen
+import com.sipe.app.ui.screens.classes.ClassDetailLoader
+import com.sipe.app.ui.screens.classes.ClassesScreen
+import com.sipe.app.ui.screens.home.HoyScreen
+import com.sipe.app.ui.screens.plan.PlanScreen
+import com.sipe.app.ui.screens.settings.AboutScreen
+import com.sipe.app.ui.screens.settings.SettingsScreen
+import com.sipe.app.ui.screens.tasks.TaskFormScreen
+import com.sipe.app.ui.screens.tasks.TasksScreen
 
 object Routes {
     const val LOGIN = "login"
