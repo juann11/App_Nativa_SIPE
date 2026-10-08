@@ -93,6 +93,8 @@ import java.util.Locale
 
 // ---------- Ayudas compartidas ----------
 
+internal val ES = Locale("es", "ES")
+
 fun dowKey(d: DayOfWeek): String = when (d) {
     DayOfWeek.MONDAY -> "LUN"
     DayOfWeek.TUESDAY -> "MAR"
