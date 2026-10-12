@@ -1,26 +1,40 @@
-# Wireframes SIPE
+# Wireframes SIPE — flujos por pantalla
 
-## Digital (listo para Figma)
+12 pantallas en `docs/wireframes/`, escala de grises 360×800, calcadas de la app. Cada flujo va en orden: una pantalla lleva a la siguiente.
 
-En `docs/wireframes/` están las 8 pantallas en escala de grises, 360×800, calcadas de la app real:
+## Flujo Acceso
+1. `figma_01_splash.png` — Splash (logo + versión) → Login
+2. `figma_02_login.png` — Login (correo + clave → Hoy, o → Registro)
+3. `figma_03_registro.png` — Registro (datos → Hoy)
 
-1. `figma_01_login.png` — Login
-2. `figma_02_registro.png` — Registro
-3. `figma_03_hoy.png` — Menú / Hoy
-4. `figma_04_listado_clases.png` — Listado (horario)
-5. `figma_05_detalle_materia.png` — Detalle
-6. `figma_06_formulario_tarea.png` — Formulario
-7. `figma_07_ajustes.png` — Configuración
-8. `figma_08_creditos.png` — Créditos
+## Flujo Hoy
+4. `figma_04_hoy.png` — Hoy (racha, resumen, clases y entregas del día → Tareas / Horario / Notas)
 
-## Llevarlo a Figma (15 min)
+## Flujo Calendario
+5. `figma_05_calendario.png` — Calendario mensual (Horario/Tareas, día → lista del día, + → Formulario)
 
-1. Archivo nuevo "SIPE - Wireframe" → 8 frames de 360×800.
-2. Arrastra cada PNG a su frame como referencia (baja opacidad).
-3. Recalca encima con componentes: botón primario, campo, tarjeta, tab inferior.
-4. Prototipo → enlaces: Login → Hoy → (Clases → Detalle) / (Tareas → Formulario) / Plan / Ajustes → Créditos.
-5. Share → copiar enlace → pegarlo en el README (sección Diseño).
+## Flujo Tareas
+6. `figma_06_tareas.png` — Tareas (Actuales/Completadas, orden, grupos por fecha)
+9. `figma_09_formulario.png` — Formulario (materia en desplegable, fecha en calendario → Tareas)
 
-## Papel (manual)
+## Flujo Horario
+7. `figma_07_horario.png` — Horario (listado → Detalle)
+8. `figma_08_detalle.png` — Detalle de materia (info + pendientes/entregadas)
 
-Una hoja por pantalla calcando las 8 imágenes, con flechas de navegación. Fotos con buena luz a `docs/wireframes_papel/` como `01_login.jpg` … `08_creditos.jpg`.
+## Flujo Plan
+10. `figma_10_plan.png` — Planificador (Semestre/Notas, estado general, por materia)
+
+## Flujo Ajustes
+11. `figma_11_ajustes.png` — Ajustes (cuenta, nivel, tema, → Créditos)
+12. `figma_12_creditos.png` — Créditos (← vuelve a Ajustes)
+
+## Llevarlo a Figma (20 min)
+
+1. Archivo "SIPE - Wireframe" → 12 frames 360×800 en este orden.
+2. Cada PNG como referencia (baja opacidad), recalcar con botón/campo/tarjeta/tab.
+3. Prototipo → conectar según las flechas de cada flujo.
+4. Share → enlace al README (Diseño).
+
+## Papel
+
+Una hoja por pantalla calcando las 12 imágenes, con las flechas de cada flujo. Fotos a `docs/wireframes_papel/` como `01_splash.jpg` … `12_creditos.jpg`.

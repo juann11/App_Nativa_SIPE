@@ -6,6 +6,7 @@ SIPE es la app oficial de tu universidad para organizar la vida académica: hora
 
 | Pantalla | Ruta | Archivo |
 |---|---|---|
+| Splash (marca) | arranque | `MainActivity.kt` + `Theme.SIPE.Splash` |
 | Login / Registro | `login`, `register` | `ui/screens/auth/AuthScreens.kt` |
 | Hoy (agenda del día + racha) | `home` | `ui/screens/home/HoyScreen.kt` |
 | Calendario mensual | `calendar` | `ui/screens/calendar/CalendarScreen.kt` |

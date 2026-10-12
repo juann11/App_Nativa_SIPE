@@ -3,4 +3,9 @@
         <item name="android:statusBarColor">@color/sipe_primary_dark</item>
         <item name="android:windowBackground">@color/sipe_bg</item>
     </style>
+    <style name="Theme.SIPE.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/ic_launcher_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_logo_mark</item>
+        <item name="postSplashScreenTheme">@style/Theme.SIPE</item>
+    </style>
 </resources>
