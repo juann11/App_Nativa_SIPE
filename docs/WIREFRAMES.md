@@ -1,40 +1,29 @@
-# Wireframes SIPE — flujos por pantalla
+# Wireframes SIPE
 
-12 pantallas en `docs/wireframes/`, escala de grises 360×800, calcadas de la app. Cada flujo va en orden: una pantalla lleva a la siguiente.
+## Diseño digital (Figma)
 
-## Flujo Acceso
-1. `figma_01_splash.png` — Splash (logo + versión) → Login
-2. `figma_02_login.png` — Login (correo + clave → Hoy, o → Registro)
-3. `figma_03_registro.png` — Registro (datos → Hoy)
+Los 12 wireframes de la app están diseñados y prototipados en Figma:
 
-## Flujo Hoy
-4. `figma_04_hoy.png` — Hoy (racha, resumen, clases y entregas del día → Tareas / Horario / Notas)
+👉 **Ver archivo en Figma:**  
+[https://www.figma.com/design/WxLn39PaUl9Ev3NVi8s5r6/SIPE?node-id=0-1&p=f&t=srasZ0yfTNVzsDPD-0](https://www.figma.com/design/WxLn39PaUl9Ev3NVi8s5r6/SIPE?node-id=0-1&p=f&t=srasZ0yfTNVzsDPD-0)
 
-## Flujo Calendario
-5. `figma_05_calendario.png` — Calendario mensual (Horario/Tareas, día → lista del día, + → Formulario)
+**Flujo de pantallas (en orden):**
 
-## Flujo Tareas
-6. `figma_06_tareas.png` — Tareas (Actuales/Completadas, orden, grupos por fecha)
-9. `figma_09_formulario.png` — Formulario (materia en desplegable, fecha en calendario → Tareas)
+1. **Splash** — Logo de SIPE y versión
+2. **Login** — Correo institucional + contraseña → Hoy o Registro
+3. **Registro** — Nombre, correo, contraseña → Hoy
+4. **Hoy** — Racha, resumen (pendientes, materias, promedio), clases del día → Tareas / Horario / Plan
+5. **Calendario** — Mes en español, modos Horario/Tareas, puntos en días con eventos, detalle del día
+6. **Tareas** — Actuales / Completadas, orden por fecha/materia/prioridad, grupos por fecha de entrega
+7. **Horario** — Listado de materias con profesor, salón, horario y créditos
+8. **Detalle de materia** — Información completa + entregas pendientes y realizadas
+9. **Formulario** — Nueva tarea con desplegable de materias y calendario de fecha
+10. **Planificador** — Semestre (estado general, por materia) / Notas (promedio por materia)
+11. **Ajustes** — Cuenta, tema oscuro, niveles, cerrar sesión
+12. **Créditos** — Información del estudiante y versión de la app (vuelve a Ajustes)
 
-## Flujo Horario
-7. `figma_07_horario.png` — Horario (listado → Detalle)
-8. `figma_08_detalle.png` — Detalle de materia (info + pendientes/entregadas)
+## Wireframes en papel
 
-## Flujo Plan
-10. `figma_10_plan.png` — Planificador (Semestre/Notas, estado general, por materia)
+Fotos de los bocetos manuales en [`docs/wireframes_papel/`](docs/wireframes_papel/), una hoja por pantalla con flechas de navegación.
 
-## Flujo Ajustes
-11. `figma_11_ajustes.png` — Ajustes (cuenta, nivel, tema, → Créditos)
-12. `figma_12_creditos.png` — Créditos (← vuelve a Ajustes)
-
-## Llevarlo a Figma (20 min)
-
-1. Archivo "SIPE - Wireframe" → 12 frames 360×800 en este orden.
-2. Cada PNG como referencia (baja opacidad), recalcar con botón/campo/tarjeta/tab.
-3. Prototipo → conectar según las flechas de cada flujo.
-4. Share → enlace al README (Diseño).
-
-## Papel
-
-Una hoja por pantalla calcando las 12 imágenes, con las flechas de cada flujo. Fotos a `docs/wireframes_papel/` como `01_splash.jpg` … `12_creditos.jpg`.
+> **Nota:** Los archivos PNG de referencia que antes estaban en `docs/wireframes/` fueron eliminados del repositorio; el diseño oficial vive en el enlace de Figma de arriba.
