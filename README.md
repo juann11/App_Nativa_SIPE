@@ -103,7 +103,12 @@ La ficha de tienda (nombre, descripciones, `icono_512.png`), la guía de firma d
 
 ## Diseño
 
-Logo original en [`docs/brand/`](docs/brand/). Wireframes en papel y archivo interactivo de Figma: ver [`docs/WIREFRAMES.md`](docs/WIREFRAMES.md).
+Logo original en [`docs/brand/`](docs/brand/).
+
+**Wireframes digitales (Figma):** [https://www.figma.com/design/WxLn39PaUl9Ev3NVi8s5r6/SIPE?node-id=0-1&p=f&t=srasZ0yfTNVzsDPD-0](https://www.figma.com/design/WxLn39PaUl9Ev3NVi8s5r6/SIPE?node-id=0-1&p=f&t=srasZ0yfTNVzsDPD-0)
+
+**Wireframes en papel:** fotos en [`docs/wireframes_papel/`](docs/wireframes_papel/).
+
 
 ## Equipo
 

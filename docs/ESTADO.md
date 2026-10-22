@@ -12,16 +12,18 @@
 - **Ajustes y Créditos:** cuenta, tema oscuro, niveles, todo con scroll y vuelta atrás.
 - **Técnico:** 100 % offline (Room + DataStore), pantallas organizadas por módulo, logo oficial (launcher + in-app + `icono_512.png`), release con R8, textos profesionales.
 
+## ✅ Listo para publicar
+
+- **.aab firmado** generado: `app/release/app-release.aab` (4.4 MB, 22/10/2026). Keystore fuera del repo (`.gitignore` lo protege).
+
 ## ❌ Lo que falta (para cerrar la Entrega 3)
 
-1. Fotos de wireframes en papel → `docs/wireframes_papel/` (carpeta vacía).
-2. Enlace del Figma en README (sección Diseño).
-3. Feature graphic 1024×500 y 4 capturas a 1080 px (icono 512 ✅, descripciones ✅).
-4. Probar en el físico target y registrar evidencias.
-5. Generar el `.aab` firmado (keystore fuera del repo).
-6. Pedir acceso a Play (`lasmovies@gmail.com`) y subir a Prueba interna.
-7. Política de privacidad pública.
-8. Presentación (guion en `docs/PRESENTACION.md`).
+1. Fotos de wireframes en papel → `docs/wireframes_papel/` (tienen 1-4.jpeg, faltan 5-8: clases, detalle, formulario, créditos).
+2. Feature graphic 1024×500 y 4 capturas a 1080 px (icono 512 ✅, descripciones ✅).
+3. Probar en el físico target y registrar evidencias.
+4. Pedir acceso a Play (`lasmovies@gmail.com`) y subir `.aab` a Prueba interna.
+5. Política de privacidad pública.
+6. Presentación (guion en `docs/PRESENTACION.md`).
 
 ## 💡 Posibles mejoras (post-entrega)
 
