@@ -1,20 +1,65 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/juann11/App_Nativa_SIPE/main/docs/brand/logo_original.jpg" width="200" alt="Logo SIPE">
+  <img src="docs/play/icono_512.png" width="140" alt="Logo de SIPE: búho junto a un planificador">
 </p>
 
-<h1 align="center">SIPE — Sistema Integrado de Planificación Estudiantil</h1>
+<h1 align="center">SIPE</h1>
 
 <p align="center">
-  <a href="https://kotlinlang.org/"><img src="https://img.shields.io/badge/Kotlin-1.9.20-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin"></a>
-  <a href="https://developer.android.com/"><img src="https://img.shields.io/badge/Android-34-3DDC84?logo=android&logoColor=white" alt="Android"></a>
-  <a href="https://developer.android.com/jetpack/compose"><img src="https://img.shields.io/badge/Jetpack%20Compose-1.6.0-4285F4?logo=android&logoColor=white" alt="Jetpack Compose"></a>
-  <a href="https://developer.android.com/training/data-storage/room"><img src="https://img.shields.io/badge/Room-2.6.1-4285F4?logo=android&logoColor=white" alt="Room"></a>
-  <a href="https://gradle.org/"><img src="https://img.shields.io/badge/Gradle-8.7-02303A?logo=gradle&logoColor=white" alt="Gradle"></a>
-  <a href="https://github.com/juann11/App_Nativa_SIPE/commits/main"><img src="https://img.shields.io/github/last-commit/juann11/App_Nativa_SIPE/main?label=Último%20commit" alt="Último commit"></a>
+  <b>Sistema Integrado de Planificación Estudiantil</b><br>
+  Horario, tareas, notas y rachas de estudio en una sola app Android, 100 % sin internet.
 </p>
 
-> **SIPE** es la app oficial de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un **sistema de rachas** que te motiva a estudiar todos los días.  
-> Diseñada para que una institución la adopte como su app estudiantil. Funciona **100 % sin internet**: todos los datos viven en el dispositivo.
+<p align="center">
+  <img src="https://img.shields.io/badge/versión-1.0.1-0EA5E9" alt="Versión 1.0.1">
+  <img src="https://img.shields.io/badge/Android-8.0%2B%20·%20API%2036-3DDC84?logo=android&logoColor=white" alt="Android 8.0+ · API 36">
+  <img src="https://img.shields.io/badge/Kotlin-2.0.20-7F52FF?logo=kotlin&logoColor=white" alt="Kotlin 2.0.20">
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-Material%203-4285F4?logo=jetpackcompose&logoColor=white" alt="Jetpack Compose con Material 3">
+  <img src="https://img.shields.io/badge/Room-2.6.1-4285F4?logo=android&logoColor=white" alt="Room 2.6.1">
+  <img src="https://img.shields.io/badge/Gradle-8.13-02303A?logo=gradle&logoColor=white" alt="Gradle 8.13">
+</p>
+
+<p align="center">
+  <a href="#-características">Características</a> ·
+  <a href="#-capturas">Capturas</a> ·
+  <a href="#️-arquitectura-mvvm-por-capas">Arquitectura</a> ·
+  <a href="#-cómo-ejecutar">Cómo ejecutar</a> ·
+  <a href="#-publicación">Publicación</a> ·
+  <a href="#-diseño">Diseño</a>
+</p>
+
+---
+
+> **SIPE** es la app de tu universidad para organizar la vida académica: horario de clases, tareas y recordatorios, notas con promedio ponderado, resumen del semestre y un **sistema de rachas** que te motiva a estudiar todos los días.
+> Está pensada para que una institución la adopte como su app estudiantil. Funciona **100 % sin internet**: todos los datos se guardan en el dispositivo.
+
+## ✨ Características
+
+- 📅 **Hoy:** agenda del día con las clases y las entregas pendientes.
+- 🗓️ **Calendario mensual:** cambia entre la vista de horario y la de tareas.
+- ✅ **Tareas:** prioridad, asignatura y fecha de entrega; se pueden ordenar y filtrar.
+- 📊 **Planificador:** estado del semestre, promedio ponderado y tareas vencidas.
+- 🔥 **Rachas y niveles:** puntos, récord y congelamientos, de *Novato* a *Leyenda SIPE*.
+- 🔒 **Privacidad:** cuentas locales con contraseña cifrada (PBKDF2 + salt) y sin servidores.
+
+## 📸 Capturas
+
+<table>
+  <tr>
+    <td align="center"><img src="docs/capturas/02_login.png" width="220" alt="Pantalla de inicio de sesión"><br><sub>Inicio de sesión</sub></td>
+    <td align="center"><img src="docs/capturas/04_hoy.png" width="220" alt="Pantalla Hoy con la racha y las clases del día"><br><sub>Hoy</sub></td>
+    <td align="center"><img src="docs/capturas/05_calendario.png" width="220" alt="Calendario mensual con tareas"><br><sub>Calendario</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/06_tareas.png" width="220" alt="Lista de tareas agrupadas por fecha"><br><sub>Tareas</sub></td>
+    <td align="center"><img src="docs/capturas/07_planificador.png" width="220" alt="Planificador del semestre con promedio"><br><sub>Planificador</sub></td>
+    <td align="center"><img src="docs/capturas/08_ajustes.png" width="220" alt="Ajustes con el nivel y los niveles disponibles"><br><sub>Ajustes y niveles</sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="docs/capturas/01_splash.png" width="220" alt="Pantalla de bienvenida con el logo"><br><sub>Splash</sub></td>
+    <td align="center"><img src="docs/capturas/03_registro.png" width="220" alt="Formulario de registro"><br><sub>Registro</sub></td>
+    <td align="center"><img src="docs/capturas/09_creditos.png" width="220" alt="Pantalla de créditos"><br><sub>Créditos</sub></td>
+  </tr>
+</table>
 
 ---
 
@@ -68,9 +113,9 @@
 | Base de datos | Room 2.6.1 (KSP) |
 | Preferencias | DataStore Preferences 1.1.1 |
 | Pruebas | JUnit 4.13.2 |
-| Build | Gradle 8.7 / AGP 8.5.2 |
-| SDK | minSdk 26 · compileSdk/targetSdk 34 |
-| ID de aplicación | `com.sipe.app` · `1.0.0` |
+| Build | Gradle 8.13 / AGP 8.13.2 |
+| SDK | minSdk 26 · compileSdk/targetSdk 36 |
+| ID de aplicación | `com.sipe.app` · `1.0.1` (versionCode 2) |
 
 ---
 
@@ -106,7 +151,7 @@ app/src/main/res/
   mipmap-*/ic_launcher(.png)        (icono adaptativo por densidad)
   values/  strings, colors, themes
 app/src/test/  StreakCalculatorTest.kt
-docs/  brand/ · play/ · wireframes_papel/ · ESTADO.md · PUBLICACION.md · WIREFRAMES.md · PRESENTACION.md
+docs/  brand/ · capturas/ · play/ · wireframes_papel/ · ESTADO.md · PUBLICACION.md · WIREFRAMES.md · PRESENTACION.md
 ```
 
 ---
@@ -132,10 +177,10 @@ Ejecutar pruebas unitarias de rachas:
 
 ## 📦 Publicación
 
-La aplicación está firmada y lista para publicar:
+La aplicación está firmada y lista para publicar en Google Play:
 
-- **App Bundle firmado:** `app/release/app-release.aab` (4.4 MB)
-- **Keystore:** fuera del repositorio (`.gitignore` lo protege)
+- **App Bundle firmado:** `app/release/app-release.aab` (versión 1.0.1, 4.4 MB)
+- **Firma:** Play App Signing. Google guarda la clave de la app y la clave de subida se queda fuera del repositorio (`.gitignore` la protege)
 - **Ficha de tienda:** nombre, descripciones, icono 512×512 y capturas en [`docs/play/`](docs/play/)
 - **Proceso completo:** [`docs/PUBLICACION.md`](docs/PUBLICACION.md)
 
